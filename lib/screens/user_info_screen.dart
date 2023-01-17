@@ -27,7 +27,8 @@ class UserInfoScreen extends StatelessWidget {
               )),
           CharacterInfoWidget(characteristic: "Species", value: user.species,),
           CharacterInfoWidget(characteristic: "Gender", value: user.gender,),
-          CharacterInfoWidget(characteristic: 'Origin', value: user.origin,)
+          CharacterInfoWidget(characteristic: "Origin", value: user.origin,),
+          CharacterInfoWidget(characteristic: "Status", value: user.status,)
         ],
       ),
     );

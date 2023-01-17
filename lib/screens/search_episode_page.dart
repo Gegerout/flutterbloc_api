@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutterbloc_api/screens/episode_info_screen.dart';
 import 'package:flutterbloc_api/screens/user_info_screen.dart';
 import '../search_bloc.dart';
 
@@ -8,7 +9,7 @@ class SearchEpisodePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final users = context.select((SearchBloc bloc) => bloc.state.users);
+    final episodes = context.select((SearchBloc bloc) => bloc.state.episodes);
     return Column(
       children: [
         const SizedBox(height: 10),
@@ -25,30 +26,24 @@ class SearchEpisodePage extends StatelessWidget {
             },
           ),
         ),
-        if (users.isNotEmpty)
+        if (episodes.isNotEmpty)
           Expanded(
               child: ListView.builder(
                 itemBuilder: (context, index) {
-                  final user = users[index];
+                  final episode = episodes[index];
                   return ListTile(
-                    title: Text(users[index].name ?? ''),
-                    leading: Hero(
-                      tag: user.name ?? '',
-                      child: CircleAvatar(
-                        backgroundImage: NetworkImage(user.image ?? ''),
-                      ),
-                    ),
+                    title: Text(episodes[index].name ?? ''),
                     onTap: () {
                       Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (_) => UserInfoScreen(
-                                user: user,
+                              builder: (_) => EpisodeInfoScreen(
+                                episode: episode,
                               )));
                     },
                   );
                 },
-                itemCount: users.length,
+                itemCount: episodes.length,
               ))
       ],
     );
