@@ -4,18 +4,16 @@ import 'package:search_user_repository/src/models/episode_model.dart';
 import 'package:search_user_repository/src/models/origin_model.dart';
 
 class SearchUserRepository {
-  final apiUrl = 'https://rickandmortyapi.com/api/character';
   final _httpClient = Dio();
 
   Future<List<UserModel>> onUserSearch(String query) async {
+    final apiUrl = 'https://rickandmortyapi.com/api/character';
     try {
       final user = await _httpClient.get(apiUrl, queryParameters: {
         'name': query,
       });
 
-      final userOut = (user.data['results'] as List).map((json) => UserModel.fromJson(json)).toList();
-
-      return userOut;
+      return (user.data['results'] as List).map((json) => UserModel.fromJson(json)).toList();
     } catch (e) {
       print('ERROR $e');
       return [];
@@ -23,14 +21,13 @@ class SearchUserRepository {
   }
 
   Future<List<OriginModel>> onOriginSearch(String query) async {
+    final apiUrl = 'https://rickandmortyapi.com/api/location';
     try {
       final origin = await _httpClient.get(apiUrl, queryParameters: {
         'name': query,
       });
 
-      final originOut = (origin.data['results'] as List).map((json) => OriginModel.fromJson(json)).toList();
-
-      return originOut;
+      return (origin.data['results'] as List).map((json) => OriginModel.fromJson(json)).toList();
     } catch (e) {
       print('ERROR $e');
       return [];
@@ -38,14 +35,13 @@ class SearchUserRepository {
   }
 
   Future<List<EpisodeModel>> onEpisodeSearch(String query) async {
+    final apiUrl = 'https://rickandmortyapi.com/api/episode';
     try {
       final episode = await _httpClient.get(apiUrl, queryParameters: {
         'name': query,
       });
 
-      final episodeOut = (episode.data['results'] as List).map((json) => EpisodeModel.fromJson(json)).toList();
-
-      return episodeOut;
+      return (episode.data['results'] as List).map((json) => EpisodeModel.fromJson(json)).toList();
     } catch (e) {
       print('ERROR $e');
       return [];
