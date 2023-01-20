@@ -12,13 +12,14 @@ class SearchUserPage extends StatelessWidget {
     return Column(
       children: [
         const SizedBox(height: 10),
-        const Text('Search'),
+        const Text('Search', style: TextStyle(fontWeight: FontWeight.bold),),
         Padding(
           padding: const EdgeInsets.all(14),
           child: TextFormField(
             decoration: InputDecoration(
                 hintText: 'enter username',
                 prefixIcon: const Icon(Icons.search),
+                hoverColor: Colors.blue[800],
                 border: OutlineInputBorder(borderRadius: BorderRadius.circular(10))),
             onChanged: (value) {
               context.read<SearchBloc>().add(SearchUserEvent(value));

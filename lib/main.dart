@@ -45,27 +45,31 @@ class _MainPageState extends State<MainPage> {
 
   @override
   Widget build(BuildContext context) {
+    bool isKeyboardOpen = MediaQuery.of(context).viewInsets.bottom != 0.0;
+
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       body: Center(
         child: _widgetOptions.elementAt(_selectedIndex),
       ),
-      bottomNavigationBar: BottomNavigationBar(
+      bottomNavigationBar: isKeyboardOpen
+          ? null : BottomNavigationBar(
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(
-            icon: Icon(Icons.home),
+            icon: Icon(Icons.person),
             label: 'Characters',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.business),
+            icon: Icon(Icons.place),
             label: 'Origins',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.school),
+            icon: Icon(Icons.movie),
             label: 'Episodes',
           ),
         ],
         currentIndex: _selectedIndex,
-        selectedItemColor: Colors.amber[800],
+        selectedItemColor: Colors.blue[800],
         onTap: _onItemTapped,
       ),
     );

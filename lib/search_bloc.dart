@@ -28,7 +28,7 @@ class SearchBloc extends Bloc<SearchEvent, SearchState> {
   late final SearchUserRepository _searchUserRepository;
 
   _onUserSearch(SearchUserEvent event, Emitter<SearchState> emit) async {
-    if (event.query.isEmpty) return emit(SearchState(users: []));
+    if (event.query.isEmpty) return emit(SearchState(users: [], origins: [], episodes: []));
     if (event.query.length < 2) return;
 
     final users = await _searchUserRepository.onUserSearch(event.query);
@@ -37,7 +37,7 @@ class SearchBloc extends Bloc<SearchEvent, SearchState> {
   }
 
   _onOriginSearch(SearchOriginEvent event, Emitter<SearchState> emit) async {
-    if (event.query.isEmpty) return emit(SearchState(origins: []));
+    if (event.query.isEmpty) return emit(SearchState(users: [], origins: [], episodes: []));
     if (event.query.length < 2) return;
 
     final origins = await _searchUserRepository.onOriginSearch(event.query);
@@ -46,7 +46,7 @@ class SearchBloc extends Bloc<SearchEvent, SearchState> {
   }
 
   _onEpisodeSearch(SearchEpisodeEvent event, Emitter<SearchState> emit) async {
-    if (event.query.isEmpty) return emit(SearchState(episodes: []));
+    if (event.query.isEmpty) return emit(SearchState(users: [], origins: [], episodes: []));
     if (event.query.length < 2) return;
 
     final episodes = await _searchUserRepository.onEpisodeSearch(event.query);
