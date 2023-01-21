@@ -38,10 +38,10 @@ class RepositoryWidget extends StatelessWidget {
                   Fluttertoast.showToast(msg: "no internet connection");
                 }
                 if(state == ConnectivityResult.wifi) {
-                  Fluttertoast.showToast(msg: "internet connected");
+                  Fluttertoast.showToast(msg: "wifi connected");
                 }
                 if(state == ConnectivityResult.ethernet) {
-                  Fluttertoast.showToast(msg: "internet connected");
+                  Fluttertoast.showToast(msg: "ethernet connected");
                 }
               },
               child: page,
