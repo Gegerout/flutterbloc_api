@@ -1,8 +1,12 @@
+import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutterbloc_api/internet_cubit.dart';
 import 'package:flutterbloc_api/screens/search_episode_page.dart';
 import 'package:flutterbloc_api/screens/search_origin_page.dart';
 import 'package:flutterbloc_api/screens/search_user_page.dart';
 import 'package:flutterbloc_api/widgets/repository_widget.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 void main() {
   runApp(const MyApp());
@@ -75,4 +79,28 @@ class _MainPageState extends State<MainPage> {
     );
   }
 }
+
+class InternetCheck extends StatelessWidget {
+  const InternetCheck({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return BlocProvider<InternetCubit>(
+      create: (_) => InternetCubit(connectivity: Connectivity()),
+      child: Scaffold(
+        body: BlocListener<InternetCubit, ConnectivityResult>(
+          listener: (context, state) {
+            if(state == ConnectivityResult.none) {
+              Fluttertoast.showToast(msg: "no internet connection");
+            }
+            if(ConnectivityResult.values.isNotEmpty) {
+              Fluttertoast.showToast(msg: "internet connected");
+            }
+          },
+          child: Container(),
+        ),
+    ),);
+  }
+}
+
 
